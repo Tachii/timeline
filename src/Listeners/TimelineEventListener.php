@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Logs\Listeners;
+namespace B4u\TimelineModule\Listeners;
 
 use B4u\TimelineModule\Models\Timeline;
 use Illuminate\Events\Dispatcher;
