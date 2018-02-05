@@ -2,7 +2,6 @@
 
 namespace B4u\TimelineModule\Listeners;
 
-use B4u\TimelineModule\Models\Timeline;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Facades\Log;
 
@@ -12,20 +11,12 @@ class TimelineEventListener
      * list of listened models
      * @var array
      */
-    protected $listenModels = [
-        'updating' => [
-            Timeline::class
-        ],
-        'created' => [
-            Timeline::class
-        ],
-        'deleting' => [
-            Timeline::class
-        ],
-        'restoring' => [
-            Timeline::class
-        ]
-    ];
+    protected $listenModels;
+
+    public function __construct()
+    {
+        $this->listenModels = config('timeline.listen_models');
+    }
 
     /**
      * Log modified data
