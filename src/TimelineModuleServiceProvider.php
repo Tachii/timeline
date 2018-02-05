@@ -24,13 +24,6 @@ class TimelineModuleServiceProvider extends AuthServiceProvider
     ];
 
     /**
-     * @var array
-     */
-    protected $subscribe = [
-        TimelineEventListener::class
-    ];
-
-    /**
      * Function fires when you run  'php artisan vendor publish'.
      */
     public function boot()

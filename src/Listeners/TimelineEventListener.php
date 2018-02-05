@@ -2,7 +2,9 @@
 
 namespace B4u\TimelineModule\Listeners;
 
+use B4u\TimelineModule\Models\Timeline;
 use Illuminate\Events\Dispatcher;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class TimelineEventListener
@@ -11,7 +13,7 @@ class TimelineEventListener
      * list of listened models
      * @var array
      */
-    protected $listenModels;
+    protected $listenModels = [];
 
     public function __construct()
     {
@@ -24,20 +26,43 @@ class TimelineEventListener
      */
     public function logCreatedAction($event)
     {
-        dd($event);
-        $this->logService->addLog($event, 'created');
+        Timeline::create(
+            [
+                'creator_id' => Auth::user()->id,
+                'creator_type' => get_class(Auth::user()),
+                'target_id' => $event->target_id,
+                'target_type' => $event->target_type,
+                'description' => Auth::user()->name . ' ' . 'created task'
+            ]
+        );
         Log::info('logs event created: ' . json_encode($event));
     }
 
     public function logUpdatingAction($event)
     {
-        $this->logService->addLog($event, 'updated');
+        Timeline::create(
+            [
+                'creator_id' => Auth::user()->id,
+                'creator_type' => get_class(Auth::user()),
+                'target_id' => $event->target_id,
+                'target_type' => $event->target_type,
+                'description' => Auth::user()->name . ' ' . 'updated task'
+            ]
+        );
         Log::info('logs event update: ' . json_encode($event));
     }
 
     public function logDeletingAction($event)
     {
-        $this->logService->addLog($event, 'deleted');
+        Timeline::create(
+            [
+                'creator_id' => Auth::user()->id,
+                'creator_type' => get_class(Auth::user()),
+                'target_id' => $event->target_id,
+                'target_type' => $event->target_type,
+                'description' => Auth::user()->name . ' ' . 'deleted task'
+            ]
+        );
         Log::info('logs event deleting: ' . json_encode($event));
     }
 
@@ -57,7 +82,7 @@ class TimelineEventListener
             foreach ($models as $model) {
                 $events->listen(
                     'eloquent.' . $eventType . ': ' . $model,
-                    'Modules\Logs\Listeners\LogsListener@log' . ucfirst($eventType) . 'Action'
+                    self::class . '@log' . ucfirst($eventType) . 'Action'
                 );
             }
         }
