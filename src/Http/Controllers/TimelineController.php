@@ -72,13 +72,13 @@ class TimelineController extends Controller
     }
 
     /**
-     * @param Timeline $task
+     * @param Timeline $timeline
      * @return \Illuminate\Http\JsonResponse
      * @throws \Throwable
      */
-    public function edit(Timeline $task)
+    public function edit(Timeline $timeline)
     {
-        return response()->view('timeline::modals.task_edit_body', ['timeline' => $task], 200);
+        return response()->view('timeline::modals.timeline_edit_body', ['timeline' => $timeline], 200);
     }
 
 
@@ -86,13 +86,13 @@ class TimelineController extends Controller
      * Update the specified resource in storage.
      *
      * @param TimelineUpdateRequest $request
-     * @param Timeline $task
+     * @param Timeline $timeline
      * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function update(TimelineUpdateRequest $request, Timeline $task)
+    public function update(TimelineUpdateRequest $request, Timeline $timeline)
     {
         try {
-            $task->fill($request->all())->save();
+            $timeline->fill($request->all())->save();
             return redirect()->back()->with(
                 'success',
                 trans('timeline::timeline.saved_text')
@@ -106,13 +106,13 @@ class TimelineController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Timeline $task
+     * @param  Timeline $timeline
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Timeline $task)
+    public function destroy(Timeline $timeline)
     {
         try {
-            $task->delete();
+            $timeline->delete();
             return redirect()->back()->with(
                 'success',
                 trans('timeline::timeline.deleted_text')

@@ -1,19 +1,19 @@
-<div class="modal fade" id="taskCreateModal" tabindex="-1" role="dialog" aria-labelledby="taskCreateModalLabel">
+<div class="modal fade" id="timelineCreateModal" tabindex="-1" role="dialog" aria-labelledby="timelineCreateModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="taskCreateModalLabel">@lang('timeline::timeline.new_task')</h4>
+                <h4 class="modal-title" id="timelineCreateModalLabel">@lang('timeline::timeline.new_timeline')</h4>
             </div>
             {{Form::open(['url' => route('timeline.store'), 'method' => 'post'])}}
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="description"
-                               class="control-label">@lang('timeline::timeline.task_description')</label>
+                               class="control-label">@lang('timeline::timeline.timeline_description')</label>
                         <textarea rows="5" name="description" id="description"
-                                  placeholder="@lang('timeline::timeline.task_description_placeholder')"
+                                  placeholder="@lang('timeline::timeline.timeline_description_placeholder')"
                                   class="form-control"></textarea>
                     </div>
                     <div class="form-group">

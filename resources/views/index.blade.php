@@ -8,7 +8,7 @@
         <div class="flex-head-direction">
             @can('create', \B4u\TimelineModule\Models\Timeline::class)
                 <div class="flex-head-item">
-                    <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#taskCreateModal">
+                    <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#timelineCreateModal">
                         <em>@lang('timeline::timeline.button_create_new')</em>
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>

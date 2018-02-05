@@ -1,3 +1,3 @@
-<div class="modal fade" id="taskEditModal" tabindex="-1" role="dialog" aria-labelledby="taskEditModalLabel">
+<div class="modal fade" id="timelineEditModal" tabindex="-1" role="dialog" aria-labelledby="timelineEditModalLabel">
     {{--Body loaded with ajax will be here--}}
 </div>

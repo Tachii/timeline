@@ -27,21 +27,21 @@ class TimelineModuleServiceProvider extends AuthServiceProvider
         }
 
         // Loading and publishing translations
-        $this->loadTranslationsFrom(__DIR__ . '/resources/lang/en', 'timelines');
+        $this->loadTranslationsFrom(__DIR__ . '/resources/lang/en', 'timeline');
 
         $this->publishes([
-            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/timelines'),
+            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/timeline'),
         ]);
 
         $this->publishes([
-            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/timelines'),
+            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/timeline'),
         ]);
 
         // Loading and publishing views and View composers
-        $this->loadViewsFrom(__DIR__ . 'resources/views', 'timelines');
+        $this->loadViewsFrom(__DIR__ . 'resources/views', 'timeline');
 
         $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/timelines'),
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/timeline'),
         ]);
 
         $this->publishes([
@@ -50,7 +50,7 @@ class TimelineModuleServiceProvider extends AuthServiceProvider
 
         // ViewComposers for timelines view
         View::composer(
-            'timeline::modals.task_create', \App\Http\Vendor\Timeline\ViewComposers\TimelineCreateModalComposer::class
+            'timeline::modals.timeline_create', \App\Http\Vendor\Timeline\ViewComposers\TimelineCreateModalComposer::class
         );
 
         View::composer(
@@ -58,7 +58,7 @@ class TimelineModuleServiceProvider extends AuthServiceProvider
         );
 
         View::composer(
-            'timeline::modals.task_edit_body', \App\Http\Vendor\Timeline\ViewComposers\TimelineEditModalComposer::class
+            'timeline::modals.timeline_edit_body', \App\Http\Vendor\Timeline\ViewComposers\TimelineEditModalComposer::class
         );
 
         // Loading routes

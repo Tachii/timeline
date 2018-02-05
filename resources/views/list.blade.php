@@ -1,25 +1,25 @@
 <div class="info-list">
     @if(isset($timelines) && $timelines->isNotEmpty())
-        @foreach($timelines as $task)
+        @foreach($timelines as $timeline)
             <div class="info-item">
                 <div class="info-item-content">
-                    <h3>{{$task->description}}</h3>
+                    <h3>{{$timeline->description}}</h3>
                     <div class="meta">@lang('timeline::timeline.assigned_to')
-                        <span class="green-text">{{$task->assigned->name}}</span> @lang('timeline::timeline.due_to')
-                        <span class="green-text">{{$task->end_date}}</span>
+                        <span class="green-text">{{$timeline->assigned->name}}</span> @lang('timeline::timeline.due_to')
+                        <span class="green-text">{{$timeline->end_date}}</span>
                     </div>
                 </div>
                 <div class="info-item-settings">
                     <div class="ii-ssettings-list">
-                        @can('update', $task)
-                            <a href="#" class="task_edit_handler btn btn-warning btn-sm"
-                               data-url="{{route('timeline.edit', ['timeline' => $task->id])}}">
+                        @can('update', $timeline)
+                            <a href="#" class="timeline_edit_handler btn btn-warning btn-sm"
+                               data-url="{{route('timeline.edit', ['timeline' => $timeline->id])}}">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
                         @endcan
-                        @can('delete', $task)
-                            {{Form::open(['url' => route('timeline.destroy', ['timeline' => $task->id]), 'method' => 'delete'])}}
-                            <a href="#" class="task_delete_handler btn btn-danger btn-sm">
+                        @can('delete', $timeline)
+                            {{Form::open(['url' => route('timeline.destroy', ['timeline' => $timeline->id]), 'method' => 'delete'])}}
+                            <a href="#" class="timeline_delete_handler btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </a>
                             {{Form::close()}}
@@ -41,7 +41,7 @@
     <script type="text/javascript">
 
         // Confirmation Popup
-        $(".task_delete_handler").click(function (e) {
+        $(".timeline_delete_handler").click(function (e) {
             e.preventDefault();
             $this = $(this);
             $.confirm({
@@ -67,9 +67,9 @@
         });
 
         // Modal for timeline editing
-        $(".task_edit_handler").on('click', function () {
+        $(".timeline_edit_handler").on('click', function () {
             $.get($(this).data('url'), function (data) {
-                $('#taskEditModal').html(data).modal('show').find('[data-datepicker]').datepicker();
+                $('#timelineEditModal').html(data).modal('show').find('[data-datepicker]').datepicker();
             });
         })
 
