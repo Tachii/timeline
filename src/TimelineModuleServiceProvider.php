@@ -6,7 +6,6 @@ use App\Policies\Vendor\Timeline\TimelinePolicy;
 use B4u\TimelineModule\Models\Timeline;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
 use Illuminate\Support\Facades\View;
-use Modules\Logs\Listeners\TimelineEventListener;
 
 /**
  * Class TimelineModuleServiceProvider
