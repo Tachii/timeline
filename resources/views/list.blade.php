@@ -4,7 +4,7 @@
             <div class="info-item">
                 <div class="info-item-content">
                     <h3>{!! $timeline->description !!}</h3>
-                    <div class="meta">@lang('timeline::timeline.assigned_to')
+                    <div class="meta">@lang('timeline::timeline.created_by')
                         <span class="green-text">{{$timeline->creator->name}}</span> @lang('timeline::timeline.due_to')
                         <span class="green-text">{{$timeline->created_at}}</span>
                     </div>

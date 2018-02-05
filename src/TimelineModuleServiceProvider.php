@@ -84,7 +84,7 @@ class TimelineModuleServiceProvider extends AuthServiceProvider
 
         //Publish Config
         $this->publishes([
-            __DIR__ . '/../config' => config_path('timeline.php'),
+            __DIR__ . '/../config' => config_path(),
         ]);
 
         $this->mergeConfigFrom(

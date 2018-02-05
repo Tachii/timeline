@@ -14,7 +14,7 @@ return [
     'close' => 'Close',
     'confirm_delete' => 'Are you sure you want to delete Timeline?',
     'deleted_text' => 'Timeline successfully deleted',
-    'due_to' => 'at',
+    'at' => 'at',
     'due_date_placeholder' => '--/--/----',
     'edit_timeline' => 'Edit Timeline',
     'error_text' => 'Something went wrong during timeline deletion',
