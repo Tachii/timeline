@@ -6,26 +6,30 @@
             </div>
         </div>
         <div class="flex-head-direction">
-            @can('create', \B4u\TimelineModule\Models\Timeline::class)
-                <div class="flex-head-item">
-                    <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#timelineCreateModal">
-                        <em>@lang('timeline::timeline.button_create_new')</em>
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </a>
-                </div>
-            @endcan
+            <div class="flex-head-item">
+                <a href="#" class="timeline_save btn btn-primary">
+                    <em>Toevoegen</em>
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+{{Form::open(['url' => route('timeline.store'), 'method' => 'post', ['id' => 'timelineStore']])}}
+{{Form::hidden('creator_id', $creator->id)}}
+{{Form::hidden('creator_type', get_class($creator))}}
+<div class="form-group">
+    <textarea name="description" id="editor-field-1" cols="30" rows="10"
+              class="textarea-tinymce form-control"></textarea>
     </div>
-@endif
+{{Form::close()}}
+
 @include('timeline::list')
-@include('timeline::modals.timeline_create')
-@include('timeline::modals.timeline_edit')
+
+@push('scripts')
+    <script type="text/javascript">
+        $(".timeline_save").on('click', function () {
+            $('#timelineStore').submit();
+        });
+    </script>
+@endpush
