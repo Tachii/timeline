@@ -1,11 +1,11 @@
 <div class="info-list">
-    @if(isset($tasks) && $tasks->isNotEmpty())
-        @foreach($tasks as $task)
+    @if(isset($timelines) && $timelines->isNotEmpty())
+        @foreach($timelines as $task)
             <div class="info-item">
                 <div class="info-item-content">
                     <h3>{{$task->description}}</h3>
-                    <div class="meta">@lang('tasks::tasks.assigned_to')
-                        <span class="green-text">{{$task->assigned->name}}</span> @lang('tasks::tasks.due_to')
+                    <div class="meta">@lang('timeline::timeline.assigned_to')
+                        <span class="green-text">{{$task->assigned->name}}</span> @lang('timeline::timeline.due_to')
                         <span class="green-text">{{$task->end_date}}</span>
                     </div>
                 </div>
@@ -13,12 +13,12 @@
                     <div class="ii-ssettings-list">
                         @can('update', $task)
                             <a href="#" class="task_edit_handler btn btn-warning btn-sm"
-                               data-url="{{route('tasks.edit', ['task' => $task->id])}}">
+                               data-url="{{route('timeline.edit', ['timeline' => $task->id])}}">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
                         @endcan
                         @can('delete', $task)
-                            {{Form::open(['url' => route('tasks.destroy', ['task' => $task->id]), 'method' => 'delete'])}}
+                            {{Form::open(['url' => route('timeline.destroy', ['timeline' => $task->id]), 'method' => 'delete'])}}
                             <a href="#" class="task_delete_handler btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </a>
@@ -30,7 +30,7 @@
         @endforeach
     @else
         <div class="panel-body">
-            <div class="alert alert-info">@lang('tasks::tasks.no_tasks')</div>
+            <div class="alert alert-info">@lang('timeline::timeline.no_timelines')</div>
         </div>
     @endif
 </div>
@@ -46,17 +46,17 @@
             $this = $(this);
             $.confirm({
                 title: '',
-                content: '<p style="text-align:center;font-size:18px;">{{ trans('tasks::tasks.confirm_delete') }}</p>',
+                content: '<p style="text-align:center;font-size:18px;">{{ trans('timeline::timeline.confirm_delete') }}</p>',
                 buttons: {
                     yes: {
-                        text: '{{ trans('tasks::tasks.button_yes') }}',
+                        text: '{{ trans('timeline::timeline.button_yes') }}',
                         btnClass: 'btn-danger',
                         action: function () {
                             $this.parent().submit();
                         }
                     },
                     no: {
-                        text: '{{ trans('tasks::tasks.button_no') }}',
+                        text: '{{ trans('timeline::timeline.button_no') }}',
                         btnClass: 'btn-blue',
                         action: function () {
 
@@ -66,7 +66,7 @@
             });
         });
 
-        // Modal for task editing
+        // Modal for timeline editing
         $(".task_edit_handler").on('click', function () {
             $.get($(this).data('url'), function (data) {
                 $('#taskEditModal').html(data).modal('show').find('[data-datepicker]').datepicker();

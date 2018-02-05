@@ -1,9 +1,9 @@
 {
-    "name": "b4u/tasks-module",
+    "name": "b4u/timeline-module",
     "repository": {
 
     },
-    "description": "This package allows to attach 'tasks' functionality to selected Model/Entity.",
+    "description": "This package allows to attach 'timeline' functionality to selected Model/Entity.",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -20,13 +20,13 @@
     },
     "autoload": {
         "psr-4": {
-            "B4u\\TasksModule\\": "src/"
+            "B4u\\TimelineModule\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "B4u\\TasksModule\\TasksModuleServiceProvider"
+                "B4u\\TimelineModule\\TimelineModuleServiceProvider"
             ]
         }
     }

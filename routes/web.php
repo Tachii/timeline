@@ -6,4 +6,4 @@
  * Time: 11:57 AM
  */
 
-Route::resource('tasks', \B4u\TasksModule\Http\Controllers\TaskController::class)->middleware('web');
+Route::resource('timeline', \B4u\TimelineModule\Http\Controllers\TimelineController::class)->middleware('web');

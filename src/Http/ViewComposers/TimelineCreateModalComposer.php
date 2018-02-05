@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Vendor\Task\ViewComposers;
+namespace App\Http\Vendor\Timeline\ViewComposers;
 
 use Illuminate\Foundation\Auth\User;
 use Illuminate\View\View;
 
 /**
- * Class TasksComposer
+ * Class TimelinesComposer
  *
- * Initialized in TasksModuleServiceProvider vendor folder.
+ * Initialized in TimelineModuleServiceProvider vendor folder.
  *
- * @package App\Http\Vendor\Task\ViewComposers
+ * @package App\Http\Vendor\Timeline\ViewComposers
  */
-class TaskEditModalComposer
+class TimelineCreateModalComposer
 {
     /**
      * Bind data to the view.
@@ -23,7 +23,6 @@ class TaskEditModalComposer
     public function compose(View $view)
     {
         //@TODO Replace data below with actual data, placeholders for now, to demonstrate logic.
-        $view->with('issuer', User::first());
-        $view->with('responsibles', User::get(['name', 'id']));
+        $view->with('creator', User::first());
     }
 }

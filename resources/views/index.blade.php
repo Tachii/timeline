@@ -2,14 +2,14 @@
     <div class="flex-head">
         <div class="flex-head-direction">
             <div class="flex-head-item">
-                <div class="panel-title">@lang('tasks::tasks.label')</div>
+                <div class="panel-title">@lang('timeline::timeline.label')</div>
             </div>
         </div>
         <div class="flex-head-direction">
-            @can('create', \B4u\TasksModule\Models\Task::class)
+            @can('create', \B4u\TimelineModule\Models\Timeline::class)
                 <div class="flex-head-item">
                     <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#taskCreateModal">
-                        <em>@lang('tasks::tasks.button_create_new')</em>
+                        <em>@lang('timeline::timeline.button_create_new')</em>
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>
                 </div>
@@ -26,6 +26,6 @@
         </ul>
     </div>
 @endif
-@include('tasks::list')
-@include('tasks::modals.task_create')
-@include('tasks::modals.task_edit')
+@include('timeline::list')
+@include('timeline::modals.timeline_create')
+@include('timeline::modals.timeline_edit')

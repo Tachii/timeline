@@ -1,38 +1,35 @@
 <?php
 
-namespace B4u\TasksModule\Models;
+namespace B4u\TimelineModule\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 
 /**
- * Class Task
+ * Class Timeline
  *
- * Model entity for Task.
+ * Model entity for Timeline.
  *
- * @package B4u\TasksModule\Models
+ * @package B4u\TimelineModule\Models
  */
-class Task extends Model
+class Timeline extends Model
 {
     /**
      * @var array
      */
     protected $fillable = [
         'description',
-        'issuer_id',
-        'issuer_type',
-        'assigned_id',
-        'assigned_type',
+        'creator_id',
+        'creator_type',
         'target_id',
         'target_type',
-        'end_date',
     ];
 
     /**
      * @var string
      */
-    protected $table = 'tasks';
+    protected $table = 'timeline';
 
     /**
      *
@@ -46,8 +43,8 @@ class Task extends Model
         try {
             $this->attributes['end_date'] = Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d');
         } catch (\Exception $exception) {
-            Log::error('Task save error, wrong date params: ' . $exception->getMessage());
-            return redirect()->back()->withErrors(['message' => trans('tasks::error_text')]);
+            Log::error('Timeline save error, wrong date params: ' . $exception->getMessage());
+            return redirect()->back()->withErrors(['message' => trans('timeline::error_text')]);
         }
     }
 
@@ -63,7 +60,7 @@ class Task extends Model
         try {
             return Carbon::createFromFormat('Y-m-d', $value)->format('m/d/Y');
         } catch (\Exception $exception) {
-            Log::error('Task getEndDateAttribute mutator error, wrong date params: ' . $exception->getMessage());
+            Log::error('Timeline getEndDateAttribute mutator error, wrong date params: ' . $exception->getMessage());
             return $value;
         }
     }
@@ -71,22 +68,22 @@ class Task extends Model
 
     /**
      *
-     * Entity that created task
+     * Entity that created timeline record
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function issuer()
+    public function creator()
     {
         return $this->morphTo();
     }
 
     /**
      *
-     * Entity assigned/responsible for the task
+     * Entity that is related to the timeline record
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function assigned()
+    public function target()
     {
         return $this->morphTo();
     }

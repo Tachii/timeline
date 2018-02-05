@@ -1,6 +1,6 @@
 <?php
 
-namespace B4u\TasksModule\Http\Requests;
+namespace B4u\TimelineModule\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -9,9 +9,9 @@ use Illuminate\Foundation\Http\FormRequest;
  *
  * Used for request validation.
  *
- * @package B4u\TasksModule\Http\Requests
+ * @package B4u\TimelineModule\Http\Requests
  */
-class TaskUpdateRequest extends FormRequest
+class TimelineStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,13 +28,14 @@ class TaskUpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(): array
+    public function rules() : array
     {
         return [
             'description' => 'required|string|max:500',
-            'issuer_id' => 'required|integer',
-            'issuer_type' => 'required|string|max:500',
-            'end_date' => 'required|date',
+            'creator_id' => 'required|integer',
+            'creator_type' => 'required|string|max:500',
+            'target_id' => 'required|integer',
+            'target_type' => 'required|string|max:500',
         ];
     }
 }

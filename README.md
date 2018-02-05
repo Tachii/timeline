@@ -1,2 +1,2 @@
-# tasks
-Tasks used in Laravel projects
+# timelines
+Timelines used in Laravel projects
