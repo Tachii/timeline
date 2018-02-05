@@ -12,7 +12,7 @@ use Illuminate\View\View;
  *
  * @package App\Http\Vendor\Timeline\ViewComposers
  */
-class TimelineCreateModalComposer
+class TimelineIndexComposer
 {
     /**
      * Bind data to the view.

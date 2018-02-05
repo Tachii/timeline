@@ -50,7 +50,7 @@ class TimelineModuleServiceProvider extends AuthServiceProvider
 
         // ViewComposers for timelines view
         View::composer(
-            'timeline::modals.timeline_create', \App\Http\Vendor\Timeline\ViewComposers\TimelineCreateModalComposer::class
+            'timeline::index', \App\Http\Vendor\Timeline\ViewComposers\TimelineIndexComposer::class
         );
 
         View::composer(
