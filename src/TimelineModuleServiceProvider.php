@@ -6,11 +6,28 @@ use App\Policies\Vendor\Timeline\TimelinePolicy;
 use B4u\TimelineModule\Models\Timeline;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
 use Illuminate\Support\Facades\View;
+use Modules\Logs\Listeners\TimelineEventListener;
 
+/**
+ * Class TimelineModuleServiceProvider
+ * @package B4u\TimelineModule
+ */
 class TimelineModuleServiceProvider extends AuthServiceProvider
 {
+    /**
+     * Security Policies to authorize actions
+     *
+     * @var array
+     */
     protected $policies = [
         Timeline::class => TimelinePolicy::class,
+    ];
+
+    /**
+     * @var array
+     */
+    protected $subscribe = [
+        TimelineEventListener::class
     ];
 
     /**
