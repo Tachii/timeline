@@ -26,7 +26,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "B4u\\TimelineModule\\TimelineModuleServiceProvider"
+                "B4u\\TimelineModule\\TimelineModuleServiceProvider",
+                "B4u\\TimelineModule\\EventServiceProvider"
             ]
         }
     }
