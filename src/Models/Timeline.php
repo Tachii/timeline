@@ -2,6 +2,7 @@
 
 namespace B4u\TimelineModule\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -25,6 +26,15 @@ class Timeline extends Model
     ];
 
     protected $table = 'timeline';
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('updated_at_desc', function (Builder $builder) {
+            $builder->orderBy('updated_at', 'desc');
+        });
+    }
 
     /**
      *
