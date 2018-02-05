@@ -15,9 +15,11 @@
         </div>
     </div>
 </div>
-{{Form::open(['url' => route('timeline.store'), 'method' => 'post', ['id' => 'timelineStore']])}}
+{{Form::open(['url' => route('timeline.store'), 'method' => 'post', 'id' => 'timelineStore'])}}
 {{Form::hidden('creator_id', $creator->id)}}
 {{Form::hidden('creator_type', get_class($creator))}}
+{{Form::hidden('target_id', $target->id)}}
+{{Form::hidden('target_type', get_class($target))}}
 <div class="form-group">
     <textarea name="description" id="editor-field-1" cols="30" rows="10"
               class="textarea-tinymce form-control"></textarea>
@@ -25,7 +27,7 @@
 {{Form::close()}}
 
 @include('timeline::list')
-
+@include('timeline::modals.timeline_edit')
 @push('scripts')
     <script type="text/javascript">
         $(".timeline_save").on('click', function () {

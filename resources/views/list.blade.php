@@ -3,10 +3,10 @@
         @foreach($timelines as $timeline)
             <div class="info-item">
                 <div class="info-item-content">
-                    <h3>{{$timeline->description}}</h3>
+                    <h3>{!! $timeline->description !!}</h3>
                     <div class="meta">@lang('timeline::timeline.assigned_to')
-                        <span class="green-text">{{$timeline->assigned->name}}</span> @lang('timeline::timeline.due_to')
-                        <span class="green-text">{{$timeline->end_date}}</span>
+                        <span class="green-text">{{$timeline->creator->name}}</span> @lang('timeline::timeline.due_to')
+                        <span class="green-text">{{$timeline->created_at}}</span>
                     </div>
                 </div>
                 <div class="info-item-settings">
@@ -69,7 +69,9 @@
         // Modal for timeline editing
         $(".timeline_edit_handler").on('click', function () {
             $.get($(this).data('url'), function (data) {
-                $('#timelineEditModal').html(data).modal('show').find('[data-datepicker]').datepicker();
+                $('#timelineEditModal').html(data);
+                sociaBalls.tinymce();
+                $('#timelineEditModal').modal('show');
             });
         })
 

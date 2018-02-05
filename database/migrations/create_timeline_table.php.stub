@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTimelinesTable extends Migration
+class CreateTimelineTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ class CreateTimelinesTable extends Migration
             $table->increments('id');
 
             $table->integer('creator_id')->comment = 'Entity:id that creates the timeline record';
-            $table->string('cretor_type')->comment = 'Entity:type that creates the timeline record';;
+            $table->string('creator_type')->comment = 'Entity:type that creates the timeline record';;
 
             $table->integer('target_id')->comment = 'Entity:id that is target of the timeline record';
             $table->string('target_type')->comment = 'Entity:type that is target of the timeline record';

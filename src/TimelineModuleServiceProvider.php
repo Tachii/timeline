@@ -2,6 +2,7 @@
 
 namespace B4u\TimelineModule;
 
+use App\Policies\Vendor\Timeline\TimelinePolicy;
 use B4u\TimelineModule\Models\Timeline;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\View;
 class TimelineModuleServiceProvider extends AuthServiceProvider
 {
     protected $policies = [
-        Timeline::class => Timeline::class,
+        Timeline::class => TimelinePolicy::class,
     ];
 
     /**
@@ -56,10 +57,10 @@ class TimelineModuleServiceProvider extends AuthServiceProvider
         View::composer(
             'timeline::list', \App\Http\Vendor\Timeline\ViewComposers\TimelineListComposer::class
         );
-
+        /*
         View::composer(
             'timeline::modals.timeline_edit_body', \App\Http\Vendor\Timeline\ViewComposers\TimelineEditModalComposer::class
-        );
+        );*/
 
         // Loading routes
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');

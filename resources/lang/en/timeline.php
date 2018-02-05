@@ -7,14 +7,14 @@
  */
 
 return [
-    'assigned_to' => 'Assigned To',
     'button_create_new' => 'Create',
     'button_yes' => 'Yes',
     'button_no' => 'No',
+    'created_by' => 'Created By',
     'close' => 'Close',
     'confirm_delete' => 'Are you sure you want to delete Timeline?',
     'deleted_text' => 'Timeline successfully deleted',
-    'due_to' => 'due',
+    'due_to' => 'at',
     'due_date_placeholder' => '--/--/----',
     'edit_timeline' => 'Edit Timeline',
     'error_text' => 'Something went wrong during timeline deletion',
