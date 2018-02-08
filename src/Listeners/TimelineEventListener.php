@@ -24,8 +24,6 @@ class TimelineEventListener
 
         'assigned_id',
         'assigned_type',
-
-        'end_date'
     ];
 
     /**
@@ -52,7 +50,7 @@ class TimelineEventListener
             }
         }
 
-        return implode($originalAttributes) . ' => ' . implode($dirtyAttributes);
+        return implode(' ', $originalAttributes) . ' => ' . implode(' ', $dirtyAttributes);
     }
 
 
