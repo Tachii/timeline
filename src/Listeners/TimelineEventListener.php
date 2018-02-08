@@ -37,23 +37,6 @@ class TimelineEventListener
         $this->listenModels = config('timeline.listen_models');
     }
 
-    private function getChanges($entity)
-    {
-        $originalAttributes = $entity->getOriginal();
-        $dirtyAttributes = $entity->getDirty();
-        foreach (self::$exceptLog as $value) {
-            if (isset($originalAttributes[$value])) {
-                unset($originalAttributes[$value]);
-            }
-            if (isset($dirtyAttributes[$value])) {
-                unset($dirtyAttributes[$value]);
-            }
-        }
-
-        return implode(' ', $originalAttributes) . ' => ' . implode(' ', $dirtyAttributes);
-    }
-
-
     /**
      * Log modified data
      * @param $event
@@ -84,6 +67,42 @@ class TimelineEventListener
             ]
         );
         Log::info('logs event update: ' . json_encode($event));
+    }
+
+    private function getChanges($entity)
+    {
+        $originalAttributes = $entity->getOriginal();
+        $dirtyAttributes = $entity->getDirty();
+
+
+        foreach (self::$exceptLog as $value) {
+            if (isset($originalAttributes[$value])) {
+                unset($originalAttributes[$value]);
+            }
+            if (isset($dirtyAttributes[$value])) {
+                unset($dirtyAttributes[$value]);
+            }
+        }
+
+
+        foreach ($originalAttributes as $k => $v) {
+            if (!isset($dirtyAttributes[$k]))
+                unset ($originalAttributes[$k]);
+        }
+
+
+        return $this->implodeWithKeys($originalAttributes) . ' => ' . $this->implodeWithKeys($dirtyAttributes);
+    }
+
+    private function implodeWithKeys(array $array): string
+    {
+        return implode(' ', array_map(
+            function ($v, $k) {
+                return sprintf("%s='%s'", $k, $v);
+            },
+            $array,
+            array_keys($array)
+        ));
     }
 
     public function logDeletingAction($event)
