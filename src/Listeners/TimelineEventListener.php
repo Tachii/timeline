@@ -9,6 +9,25 @@ use Illuminate\Support\Facades\Log;
 
 class TimelineEventListener
 {
+    private static $exceptLog = [
+        'id',
+        'remember_token',
+        'updated_at',
+        'created_at',
+        'last_log_in',
+
+        'issuer_id',
+        'issuer_type',
+
+        'target_id',
+        'target_type',
+
+        'assigned_id',
+        'assigned_type',
+
+        'end_date'
+    ];
+
     /**
      * list of listened models
      * @var array
@@ -19,6 +38,23 @@ class TimelineEventListener
     {
         $this->listenModels = config('timeline.listen_models');
     }
+
+    private function getChanges($entity)
+    {
+        $originalAttributes = $entity->getOriginal();
+        $dirtyAttributes = $entity->getDirty();
+        foreach (self::$exceptLog as $value) {
+            if (isset($originalAttributes[$value])) {
+                unset($originalAttributes[$value]);
+            }
+            if (isset($dirtyAttributes[$value])) {
+                unset($dirtyAttributes[$value]);
+            }
+        }
+
+        return implode($originalAttributes) . ' => ' . implode($dirtyAttributes);
+    }
+
 
     /**
      * Log modified data
@@ -32,7 +68,7 @@ class TimelineEventListener
                 'creator_type' => get_class(Auth::user()),
                 'target_id' => $event->target_id,
                 'target_type' => $event->target_type,
-                'description' => Auth::user()->name . ' ' . 'created task'
+                'description' => Auth::user()->name . ' ' . 'created ' . class_basename($event) . ': ' . $event->description
             ]
         );
         Log::info('logs event created: ' . json_encode($event));
@@ -46,7 +82,7 @@ class TimelineEventListener
                 'creator_type' => get_class(Auth::user()),
                 'target_id' => $event->target_id,
                 'target_type' => $event->target_type,
-                'description' => Auth::user()->name . ' ' . 'updated task'
+                'description' => Auth::user()->name . ' ' . 'updated ' . class_basename($event) . ' : ' . $this->getChanges($event)
             ]
         );
         Log::info('logs event update: ' . json_encode($event));
@@ -60,7 +96,7 @@ class TimelineEventListener
                 'creator_type' => get_class(Auth::user()),
                 'target_id' => $event->target_id,
                 'target_type' => $event->target_type,
-                'description' => Auth::user()->name . ' ' . 'deleted task'
+                'description' => Auth::user()->name . ' ' . 'deleted ' . class_basename($event) . ' ' . $event->description
             ]
         );
         Log::info('logs event deleting: ' . json_encode($event));
