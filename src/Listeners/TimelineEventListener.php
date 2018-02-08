@@ -7,8 +7,15 @@ use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * Class TimelineEventListener
+ * @package B4u\TimelineModule\Listeners
+ */
 class TimelineEventListener
 {
+    /**
+     * @var array
+     */
     private static $exceptLog = [
         'id',
         'remember_token',
@@ -32,6 +39,9 @@ class TimelineEventListener
      */
     protected $listenModels = [];
 
+    /**
+     * TimelineEventListener constructor.
+     */
     public function __construct()
     {
         $this->listenModels = config('timeline.listen_models');
@@ -55,6 +65,9 @@ class TimelineEventListener
         Log::info('logs event created: ' . json_encode($event));
     }
 
+    /**
+     * @param $event
+     */
     public function logUpdatingAction($event)
     {
         Timeline::create(
@@ -69,6 +82,10 @@ class TimelineEventListener
         Log::info('logs event update: ' . json_encode($event));
     }
 
+    /**
+     * @param $entity
+     * @return string
+     */
     private function getChanges($entity)
     {
         $originalAttributes = $entity->getOriginal();
@@ -94,6 +111,10 @@ class TimelineEventListener
         return $this->implodeWithKeys($originalAttributes) . ' => ' . $this->implodeWithKeys($dirtyAttributes);
     }
 
+    /**
+     * @param array $array
+     * @return string
+     */
     private function implodeWithKeys(array $array): string
     {
         return implode(' ', array_map(
@@ -105,6 +126,9 @@ class TimelineEventListener
         ));
     }
 
+    /**
+     * @param $event
+     */
     public function logDeletingAction($event)
     {
         Timeline::create(
@@ -119,6 +143,9 @@ class TimelineEventListener
         Log::info('logs event deleting: ' . json_encode($event));
     }
 
+    /**
+     * @param $event
+     */
     public function logRestoringAction($event)
     {
         $this->logService->addLog($event, 'restored');
