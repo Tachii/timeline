@@ -3,6 +3,7 @@
 namespace B4u\TimelineModule\Listeners;
 
 use B4u\TimelineModule\Models\Timeline;
+use Carbon\Carbon;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -102,11 +103,19 @@ class TimelineEventListener
         }
 
 
+
         foreach ($originalAttributes as $k => $v) {
             if (!isset($dirtyAttributes[$k]))
                 unset ($originalAttributes[$k]);
         }
 
+        if (isset($dirtyAttributes['end_date'])) {
+            $dirtyAttributes['end_date'] = Carbon::createFromFormat('Y-m-d', $dirtyAttributes['end_date'])->format(config('date.date_format'));
+        }
+
+        if (isset($originalAttributes['end_date'])) {
+            $originalAttributes['end_date'] = Carbon::createFromFormat('Y-m-d', $originalAttributes['end_date'])->format(config('date.date_format'));
+        }
 
         return $this->implodeWithKeys($originalAttributes) . ' => ' . $this->implodeWithKeys($dirtyAttributes);
     }
