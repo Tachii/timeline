@@ -103,7 +103,6 @@ class TimelineEventListener
         }
 
 
-
         foreach ($originalAttributes as $k => $v) {
             if (!isset($dirtyAttributes[$k]))
                 unset ($originalAttributes[$k]);
@@ -117,7 +116,30 @@ class TimelineEventListener
             $originalAttributes['end_date'] = Carbon::createFromFormat('Y-m-d', $originalAttributes['end_date'])->format(config('date.date_format'));
         }
 
+        $originalAttributes = $this->convertToTitleCase($originalAttributes);
+        $dirtyAttributes = $this->convertToTitleCase($dirtyAttributes);
+
         return $this->implodeWithKeys($originalAttributes) . ' => ' . $this->implodeWithKeys($dirtyAttributes);
+    }
+
+    /**
+     * Converts array keys to "Title Case"
+     *
+     * @param $array
+     * @return array
+     */
+    public function convertToTitleCase($array): array
+    {
+
+        $finalArray = [];
+
+        foreach ($array as $key => $value) {
+            unset($array[$key]);
+            $key = title_case(str_replace('_', ' ', $key));
+            $array[$key] = $value;
+        }
+
+        return $finalArray;
     }
 
     /**
@@ -146,7 +168,7 @@ class TimelineEventListener
                 'creator_type' => get_class(Auth::user()),
                 'target_id' => $event->target_id,
                 'target_type' => $event->target_type,
-                'description' => Auth::user()->name . ' ' . 'deleted ' . class_basename($event) . ' : ' . $event->description
+                'description' => Auth::user()->name . ' ' . 'closed ' . class_basename($event) . ' : ' . $event->description
             ]
         );
         Log::info('logs event deleting: ' . json_encode($event));
