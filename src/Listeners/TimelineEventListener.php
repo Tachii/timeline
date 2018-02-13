@@ -130,16 +130,13 @@ class TimelineEventListener
      */
     public function convertToTitleCase($array): array
     {
-
-        $finalArray = [];
-
         foreach ($array as $key => $value) {
             unset($array[$key]);
             $key = title_case(str_replace('_', ' ', $key));
             $array[$key] = $value;
         }
 
-        return $finalArray;
+        return $array;
     }
 
     /**
