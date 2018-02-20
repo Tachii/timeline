@@ -60,7 +60,7 @@ class TimelineEventListener
                 'creator_type' => get_class(Auth::user()),
                 'target_id' => $event->target_id,
                 'target_type' => $event->target_type,
-                'description' => Auth::user()->name . ' ' . 'created ' . class_basename($event) . ': ' . $event->description
+                'description' => Auth::user()->name ?? 'System' . ' ' . 'created ' . class_basename($event) . ': ' . $event->description
             ]
         );
         Log::info('logs event created: ' . json_encode($event));
@@ -165,7 +165,7 @@ class TimelineEventListener
                 'creator_type' => get_class(Auth::user()),
                 'target_id' => $event->target_id,
                 'target_type' => $event->target_type,
-                'description' => Auth::user()->name . ' ' . 'closed ' . class_basename($event) . ' : ' . $event->description
+                'description' => Auth::user()->name ?? 'System' . ' ' . 'closed ' . class_basename($event) . ' : ' . $event->description
             ]
         );
         Log::info('logs event deleting: ' . json_encode($event));
