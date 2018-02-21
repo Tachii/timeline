@@ -16,11 +16,8 @@ class CreateTimelineTable extends Migration
         Schema::create('timeline', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('creator_id')->comment = 'Entity:id that creates the timeline record';
-            $table->string('creator_type')->comment = 'Entity:type that creates the timeline record';;
-
-            $table->integer('target_id')->comment = 'Entity:id that is target of the timeline record';
-            $table->string('target_type')->comment = 'Entity:type that is target of the timeline record';
+            $table->nullableMorphs('creator')->comment = 'Entity that creates the timeline record';
+            $table->morphs('target')->comment = 'Entity:id that is target of the timeline record';
 
             $table->text('description')->comment = 'Description for the timeline record';
 

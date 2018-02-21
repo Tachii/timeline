@@ -32,8 +32,8 @@ class TimelineStoreRequest extends FormRequest
     {
         return [
             'description' => 'required|string|max:500',
-            'creator_id' => 'required|integer',
-            'creator_type' => 'required|string|max:500',
+            'creator_id' => 'nullable|integer',
+            'creator_type' => 'nullable|string|max:500',
             'target_id' => 'required|integer',
             'target_type' => 'required|string|max:500',
         ];
