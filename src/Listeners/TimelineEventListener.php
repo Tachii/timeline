@@ -39,12 +39,16 @@ class TimelineEventListener
      */
     protected $listenModels = [];
 
+    protected $user_name;
+
     /**
      * TimelineEventListener constructor.
      */
     public function __construct()
     {
         $this->listenModels = config('timeline.listen_models');
+        $this->user_name = Auth::user() ? Auth::user()->name : 'System';
+
     }
 
     /**
@@ -54,11 +58,11 @@ class TimelineEventListener
     public function logCreatedAction($event)
     {
         Timeline::create([
-            'creator_id' => Auth::user() ? Auth::user()->id : '',
-            'creator_type' => Auth::user() ? get_class(Auth::user()) : '',
+            'creator_id' => Auth::user() ? Auth::user()->id : null,
+            'creator_type' => Auth::user() ? get_class(Auth::user()) : null,
             'target_id' => $event->target_id,
             'target_type' => $event->target_type,
-            'description' => Auth::user() ? Auth::user()->name : 'System' . ' ' . 'created ' . class_basename($event) . ': ' . $event->description
+            'description' => $this->user_name . ' ' . 'created ' . class_basename($event) . ': ' . $event->description
         ]);
     }
 
@@ -69,11 +73,11 @@ class TimelineEventListener
     {
         Timeline::create(
             [
-                'creator_id' => Auth::user() ? Auth::user()->id : '',
-                'creator_type' => Auth::user() ? get_class(Auth::user()) : '',
+                'creator_id' => Auth::user() ? Auth::user()->id : null,
+                'creator_type' => Auth::user() ? get_class(Auth::user()) : null,
                 'target_id' => $event->target_id,
                 'target_type' => $event->target_type,
-                'description' => Auth::user() ? Auth::user()->name : 'System' . ' ' . 'updated ' . class_basename($event) . ' : ' . $this->getChanges($event)
+                'description' => $this->user_name . ' ' . 'updated ' . class_basename($event) . ' : ' . $this->getChanges($event)
             ]
         );
     }
@@ -156,11 +160,11 @@ class TimelineEventListener
     {
         Timeline::create(
             [
-                'creator_id' => Auth::user() ? Auth::user()->id : '',
-                'creator_type' => Auth::user() ? get_class(Auth::user()) : '',
+                'creator_id' => Auth::user() ? Auth::user()->id : null,
+                'creator_type' => Auth::user() ? get_class(Auth::user()) : null,
                 'target_id' => $event->target_id,
                 'target_type' => $event->target_type,
-                'description' => Auth::user() ? Auth::user()->name : 'System' . ' ' . 'closed ' . class_basename($event) . ' : ' . $event->description
+                'description' => $this->user_name . ' ' . 'updated ' . class_basename($event) . ' : ' . $event->description
             ]
         );
     }
