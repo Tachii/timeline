@@ -56,8 +56,8 @@ class TimelineEventListener
     {
         Timeline::create(
             [
-                'creator_id' => Auth::user()->id,
-                'creator_type' => get_class(Auth::user()),
+                'creator_id' => Auth::user()->id ?? '',
+                'creator_type' => Auth::user()->id ? get_class(Auth::user()) : '',
                 'target_id' => $event->target_id,
                 'target_type' => $event->target_type,
                 'description' => Auth::user()->name ?? 'System' . ' ' . 'created ' . class_basename($event) . ': ' . $event->description
@@ -73,8 +73,8 @@ class TimelineEventListener
     {
         Timeline::create(
             [
-                'creator_id' => Auth::user()->id,
-                'creator_type' => get_class(Auth::user()),
+                'creator_id' => Auth::user()->id ?? '',
+                'creator_type' => Auth::user()->id ? get_class(Auth::user()) : '',
                 'target_id' => $event->target_id,
                 'target_type' => $event->target_type,
                 'description' => Auth::user()->name . ' ' . 'updated ' . class_basename($event) . ' : ' . $this->getChanges($event)
@@ -161,8 +161,8 @@ class TimelineEventListener
     {
         Timeline::create(
             [
-                'creator_id' => Auth::user()->id,
-                'creator_type' => get_class(Auth::user()),
+                'creator_id' => Auth::user()->id ?? '',
+                'creator_type' => Auth::user()->id ? get_class(Auth::user()) : '',
                 'target_id' => $event->target_id,
                 'target_type' => $event->target_type,
                 'description' => Auth::user()->name ?? 'System' . ' ' . 'closed ' . class_basename($event) . ' : ' . $event->description
