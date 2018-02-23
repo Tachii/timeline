@@ -164,7 +164,7 @@ class TimelineEventListener
                 'creator_type' => Auth::user() ? get_class(Auth::user()) : null,
                 'target_id' => $event->target_id,
                 'target_type' => $event->target_type,
-                'description' => $this->user_name . ' ' . 'updated ' . class_basename($event) . ' : ' . $event->description
+                'description' => $this->user_name . ' ' . 'closed ' . class_basename($event) . ' : ' . $event->description
             ]
         );
     }
