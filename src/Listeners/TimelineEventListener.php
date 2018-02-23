@@ -115,6 +115,14 @@ class TimelineEventListener
             $originalAttributes['end_date'] = Carbon::createFromFormat('Y-m-d', $originalAttributes['end_date'])->format(config('date.date_format'));
         }
 
+        if (isset($dirtyAttributes['status'])) {
+            $dirtyAttributes['status'] = trans('assignments::assignments.table.statuses.' . $dirtyAttributes['status']);
+        }
+
+        if (isset($originalAttributes['status'])) {
+            $originalAttributes['status'] = trans('assignments::assignments.table.statuses.' . $originalAttributes['status']);
+        }
+
         $originalAttributes = $this->convertToTitleCase($originalAttributes);
         $dirtyAttributes = $this->convertToTitleCase($dirtyAttributes);
 
