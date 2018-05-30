@@ -1,0 +1,34 @@
+{
+    "name": "b4u/timeline-module",
+    "repository": {
+
+    },
+    "description": "This package allows to attach 'timeline' functionality to selected Model/Entity.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gleb Zaveruha",
+            "email": "gzaveruha@b4u.md",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=7.0",
+        "laravel/framework": "^5.5",
+        "laravelcollective/html": "^5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "B4u\\TimelineModule\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "B4u\\TimelineModule\\TimelineModuleServiceProvider",
+                "B4u\\TimelineModule\\EventServiceProvider"
+            ]
+        }
+    }
+}
