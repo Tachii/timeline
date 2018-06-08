@@ -1,6 +1,4 @@
 <?php
-
-
 return [
     'listen_models' => [
         'updating' => [
@@ -14,6 +12,6 @@ return [
         ],
         'restoring' => [
             /*Timeline::class*/
-        ]
-    ]
+        ],
+    ],
 ];
